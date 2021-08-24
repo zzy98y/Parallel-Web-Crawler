@@ -11,7 +11,10 @@ Q1. Run the web crawler using the configurations located at src/main/config/writ
 
     Why did the parser take more time when run with ParallelWebCrawler?
 
+     Ans: The Profiler capture the total time spent in a method in all thread instead each of the thread.
+          The profiler sums up all the time taken by the parse method in all threads.
 
+-----------------------------------------------------------------------------------------------------------------------
 Q2. Your manager ran your crawler on her old personal computer, using the configurations from Q1, and she notices that
     the sequential crawler actually outperforms the parallel crawler. She would like to know why.
 
@@ -21,6 +24,12 @@ Q2. Your manager ran your crawler on her old personal computer, using the config
     (b) Suggest one scenario in which the parallel web crawler will almost certainly perform better than the sequential
         crawler. Why will it perform better?
 
+    (a) Ans: When apply parallel webcrawler on an old computer, because it has multiple threads, it will cost more
+             resource using parallel crawler than using a sequential crawler because it only has one thread.
+
+    (b) Ans: On multi-core computer, the parallel web crawler will perform better than sequential web crawler.
+
+-----------------------------------------------------------------------------------------------------------------------
 
 Q3. Analyze your method profiler through the lens of Aspect Oriented Programming, by answering the following questions:
 
@@ -28,6 +37,11 @@ Q3. Analyze your method profiler through the lens of Aspect Oriented Programming
 
     (b) What are the join points of the Profiler in the web crawler program?
 
+    (a) Ans: It was able to evaluate the performance of each method.
+
+    (b) Ans: Invoke method with @Profiled annotation.
+
+------------------------------------------------------------------------------------------------------------------------
 
 Q4. Identify three (3) different design patterns used in this project, and explain which interfaces, classes, and/or
     libraries use or implement those design patterns.
@@ -35,4 +49,17 @@ Q4. Identify three (3) different design patterns used in this project, and expla
     For each pattern, name one thing about the pattern that you LIKED, and one thing you DISLIKED. If you did not like
     anything, you can name two things you disliked.
 
+    Ans:
+    Proxy Pattern: It was used in "ProfilerImpl" and "ProfilingMethodInterceptor"
+    Pros: Use a single class and a single method to serve multiple method calls.
+    Cons: It wasn't an easy concept to understand compare to other concept in Java.
 
+    Builder Pattern: It was used in "CrawlerConfiguration"
+    Pros: It helps build object step by step, which is easier for people to understand and code are
+    generally more readable.
+    Cons: When the object become large, it could cause unexpected complexity.
+
+    Dependency Injection Pattern: It was used in "WebCrawlerMain"
+    Pros: I think it's helpful when we need to use code from another class, use import and dependency injection make
+    it easier to work with.
+    Cons: But sometimes the class/dependency in different directory or from a different project make it hard to import
