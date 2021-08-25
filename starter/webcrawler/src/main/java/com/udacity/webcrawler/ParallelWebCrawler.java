@@ -5,14 +5,13 @@ import com.udacity.webcrawler.parser.PageParser;
 import com.udacity.webcrawler.parser.PageParserFactory;
 
 import javax.inject.Inject;
-import javax.inject.Provider;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
 
 /**
  * A concrete implementation of {@link WebCrawler} that runs multiple threads on a
@@ -69,15 +68,15 @@ final class ParallelWebCrawler implements WebCrawler {
 
   }
 
-  public class parallelCrawlInternal extends RecursiveTask<Boolean> {
-    private String url;
-    private Instant deadline;
-    private int maxDepth;
-    private ConcurrentMap<String, Integer> counts;
-    private ConcurrentSkipListSet<String> visitedUrls;
-    private Clock clock;
-    private PageParserFactory parserFactory;
-    private List<Pattern> ignoredUrls;
+  public static class parallelCrawlInternal extends RecursiveTask<Boolean> {
+    private final String url;
+    private final Instant deadline;
+    private final int maxDepth;
+    private final ConcurrentMap<String, Integer> counts;
+    private final ConcurrentSkipListSet<String> visitedUrls;
+    private final Clock clock;
+    private final PageParserFactory parserFactory;
+    private final List<Pattern> ignoredUrls;
 
     public parallelCrawlInternal(String url, Instant deadline, int maxDepth, ConcurrentMap<String, Integer> counts, ConcurrentSkipListSet<String> visitedUrls, Clock clock,
                                  PageParserFactory parserFactory, List<Pattern> ignoredUrls) {
