@@ -35,14 +35,14 @@ public final class WebCrawlerMain {
     CrawlResult result = crawler.crawl(config.getStartPages());
     CrawlResultWriter resultWriter = new CrawlResultWriter(result);
 
-    if (this.config.getResultPath() == null) {
+    if (this.config.getResultPath().isEmpty()) {
       resultWriter.write(new OutputStreamWriter(System.out));
     }
     else {
       resultWriter.write(Path.of(this.config.getResultPath()));
     }
 
-    if (this.config.getResultPath() == null) {
+    if (this.config.getProfileOutputPath().isEmpty()) {
      profiler.writeData(new OutputStreamWriter(System.out));
     }
     else {
