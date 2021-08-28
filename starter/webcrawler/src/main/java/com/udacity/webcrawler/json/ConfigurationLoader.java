@@ -31,12 +31,10 @@ public final class ConfigurationLoader {
    */
   public CrawlerConfiguration load(){
     try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
-      read(reader);
+      return read(reader);
     } catch (Exception e) {
       return null;
     }
-
-    return new CrawlerConfiguration.Builder().build();
   }
 
   /**
