@@ -48,6 +48,8 @@ public final class WebCrawlerMain {
     else {
       profiler.writeData(Path.of(this.config.getProfileOutputPath()));
     }
+
+
   }
 
   public static void main(String[] args) throws Exception {
@@ -57,6 +59,7 @@ public final class WebCrawlerMain {
     }
 
     CrawlerConfiguration config = new ConfigurationLoader(Path.of(args[0])).load();
+    System.out.println("Let's crawl!");
     new WebCrawlerMain(config).run();
   }
 }

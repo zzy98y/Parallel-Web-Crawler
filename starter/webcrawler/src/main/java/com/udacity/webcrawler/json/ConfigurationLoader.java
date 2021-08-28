@@ -29,10 +29,12 @@ public final class ConfigurationLoader {
    *
    * @return the loaded {@link CrawlerConfiguration}.
    */
-  public CrawlerConfiguration load() throws IOException {
-    Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8);
-    read(reader);
-    reader.close();
+  public CrawlerConfiguration load(){
+    try (Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+      read(reader);
+    } catch (Exception e) {
+      return null;
+    }
 
     return new CrawlerConfiguration.Builder().build();
   }
